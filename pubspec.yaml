@@ -39,6 +39,8 @@ dependencies:
   fluttertoast: ^8.2.1
   get: ^4.6.5
   shared_preferences: ^2.0.18
+  another_flushbar: ^1.12.29
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:
