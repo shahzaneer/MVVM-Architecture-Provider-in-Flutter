@@ -6,6 +6,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 class Utils {
 // ! It contains all the utilities which help you in your project
 
+  static void changeNodeFocus(BuildContext context,
+      {FocusNode? current, FocusNode? next}) {
+    current!.unfocus();
+    FocusScope.of(context).requestFocus(next);
+  }
+
   static toastMessage(String message) {
     Fluttertoast.showToast(
       msg: message,

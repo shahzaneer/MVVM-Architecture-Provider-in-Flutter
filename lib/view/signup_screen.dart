@@ -1,18 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:mvvm_app/res/widgets/round_button.dart';
-import 'package:mvvm_app/utils/routes/routes_names.dart';
-import 'package:mvvm_app/utils/utils.dart';
-import 'package:mvvm_app/viewModel/auth_viewmodel.dart';
-import 'package:provider/provider.dart';
+import "package:flutter/material.dart";
+import "package:mvvm_app/utils/routes/routes_names.dart";
+import "package:provider/provider.dart";
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+import "../res/widgets/round_button.dart";
+import "../utils/utils.dart";
+import "../viewModel/auth_viewmodel.dart";
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final ValueNotifier<bool> _obsecureNotifier = ValueNotifier<bool>(false);
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Login"),
+        title: const Text("Sign up"),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
@@ -100,8 +101,11 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             RoundButton(
                 title: "Login",
-                loading: authviewmodel.loading,
+                loading: authviewmodel.signupLoading,
                 onPress: () {
+                  //Keyboard off krne k liay
+                  _passwordFocus.unfocus();
+
                   if (_emailController.text.isEmpty &&
                       _passwordController.text.isEmpty) {
                     Utils.flushBarErrorMessage(
@@ -115,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "email": _emailController.text.toString(),
                       "password": _passwordController.text.toString()
                     };
-                    authviewmodel.apilogin(data, context);
+                    authviewmodel.apiSignUp(data, context);
                     debugPrint("hit API");
                   }
                 }),
@@ -124,9 +128,9 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, RouteNames.signupScreen);
+                  Navigator.pushNamed(context, RouteNames.login);
                 },
-                child: const Text("Don't have an account yet? Sign Up!"))
+                child: const Text("Already have an account? Login Up!"))
           ],
         ),
       ),
@@ -142,10 +146,3 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordFocus.dispose();
   }
 }
-
-
-
-//! Recalling Providers
-// used for state Management (efficicent)
-// valueNotifier (for single value)
-//  valueListenerBuilder (which listens to this value)
