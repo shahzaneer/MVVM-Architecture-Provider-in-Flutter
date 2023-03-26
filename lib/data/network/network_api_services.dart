@@ -42,7 +42,7 @@ class NetworkApiServices extends BaseApiServices {
       case 400:
         throw BadRequestException("achi request nhi hai yeh");
       default:
-        throw InternetException("Internet nhi hai bros");
+        throw InternetException("${response.statusCode} : ${response.reasonPhrase}");
     }
   }
 }

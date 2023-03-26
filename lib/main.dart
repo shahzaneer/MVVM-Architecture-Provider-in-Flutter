@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_app/utils/routes/routes.dart';
 import 'package:mvvm_app/utils/routes/routes_names.dart';
 import 'package:mvvm_app/viewModel/auth_viewmodel.dart';
+import 'package:mvvm_app/viewModel/home_view_model.dart';
 import 'package:mvvm_app/viewModel/user_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthViewModel()),
-        ChangeNotifierProvider(create: (_) => UserViewModel())
+        ChangeNotifierProvider(create: (_) => UserViewModel()),
+        ChangeNotifierProvider(create: (_) => HomeViewModel())
       ],
       child: WillPopScope(
         onWillPop: () async {

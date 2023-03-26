@@ -47,4 +47,16 @@ class Utils {
     return ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(backgroundColor: Colors.red, content: Text(message)));
   }
+
+  // average for ratings
+
+  static double averageRatings(List<int> ratings) {
+    double avg = 0;
+    for (int i = 0; i < ratings.length; i++) {
+      avg += ratings[i];
+    }
+    avg /= ratings.length;
+
+    return avg;
+  }
 }
